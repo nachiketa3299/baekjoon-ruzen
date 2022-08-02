@@ -1,3 +1,7 @@
 *.out
-.vscode/*
+.vscode/
 !.vscode/*.json
+
+cpp/bin/
+**/*.dSYM/
+

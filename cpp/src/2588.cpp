@@ -5,22 +5,23 @@
 
 using namespace std;
 
-int * intToArr(int);
+int * intToArr (int);
+int power (int, int);
 const int MAX_SIZE = 3;
 
 int main (void) {
     int A, B;
     // A, B length is 3 ex) 472, 385
-    //cin >> A;
-    //cin >> B;
-    A = 472, B = 385;
+    cin >> A;
+    cin >> B;
     int * arr_B = intToArr(B);
+
     int result[MAX_SIZE + 1];
 
     for (int i = 0; i < MAX_SIZE; i++) {
         *(result + i) = A * arr_B[i];
     }
-    *(result + MAX_SIZE + 1) = A * B;
+    *(result + MAX_SIZE) = A * B;
 
     for (int i = 0; i < MAX_SIZE + 1; i++) {
         cout << *(result + i) << endl;
@@ -28,6 +29,23 @@ int main (void) {
 
     return 0;
 }
+
+int power(int base, int n) {
+    int p = base;
+    if (n == 0) {
+        return 1;
+    } else if (n == 1) {
+        return base;
+    } else {
+        for (int i = 1; i < n; i++) {
+            base *= p;
+        }
+    }
+    
+    return base;
+}
+
+
 
 int * intToArr(int input) {
     // a[] = 375, a[0] = 5, a[1] = 7, a[2] = 3
@@ -42,8 +60,8 @@ int * intToArr(int input) {
     int * int_arr = new int [input_size];
 
     for (int i = 0; i < input_size; i++) {
-        int t = input / pow(10, i);
-        *(int_arr + i) = t - (t / pow(10, 1)) * pow(10, 1);
+        int t = input / power(10, i);
+        *(int_arr + i) = t - (t / power(10, 1)) * power(10, 1);
     }
     return int_arr;
 }

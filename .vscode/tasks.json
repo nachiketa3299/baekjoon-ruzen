@@ -13,7 +13,7 @@
                 "-g", // 디버그 옵션 
                 "${file}", // 타겟 파일
                 "-o", // 아웃풋 이름
-                "../bin/${fileBasenameNoExtension}"
+                "../bin/${fileBasenameNoExtension}.out"
             ],
             "options": {
                 "cwd": "${fileDirname}"
@@ -23,6 +23,20 @@
             ],
             "group": {
                 "kind": "build",
+            },
+            "detail": "디버거에서 생성된 작업입니다."
+        },
+        {
+            "type": "shell",
+            "label": "C/C++ 실행 (by RUZEN)",
+            "command": "../bin/${fileBasenameNoExtension}.out",
+            "args": [
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "group": {
+                "kind": "test",
             },
             "detail": "디버거에서 생성된 작업입니다."
         },
