@@ -4,4 +4,6 @@
 
 cpp/bin/
 **/*.dSYM/
+**/*.exe
+**/*.obj
 

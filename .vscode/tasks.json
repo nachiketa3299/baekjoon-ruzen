@@ -37,9 +37,12 @@
                 "/Zi",
                 "/EHsc",
                 "/Fe:",
-                "&{fileDirname}\\${fileBasenameNoExtension}.exe",
+                "..\\bin\\&{fileBasenameNoExtension}.exe",
                 "${file}"
             ],
+            "options": {
+                "cwd": "&{fileDirname}"
+            },
             "problemMatcher": "&msCompile",
             "group": {
                 "kind": "build",
