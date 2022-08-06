@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "g++ 디버그 (by RUZEN)",
+            "name": "[lldb] 디버그 (by RUZEN)",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceRoot}/cpp/bin/${fileBasenameNoExtension}.out",
@@ -17,6 +17,27 @@
             "MIMode": "lldb",
             //"miDebuggerPath": "/usr/bin/lldb",
             //"preLaunchTask": "C/C++ clang++ [-g] 빌드 (by RUZEN)"
+        },
+        {
+            "name": "[WSL-g++] 디버그 (by RUZEN)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceRoot}/cpp/bin/${fileBasenameNoExtension}",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb (bt RUZEN)",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask":"[WSL-g++] C/C++ 디버그 모드 빌드 (by RUZEN)"
         }
     ]
 }
