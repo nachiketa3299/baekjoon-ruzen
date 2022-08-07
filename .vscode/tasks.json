@@ -3,11 +3,9 @@
 {
 
     "version": "2.0.0",
-    "windows": { },
-
     "tasks": [
         {
-            "type": "cppbuild",
+            "type": "shell",
             "label": "[macOS-clang++] C++ 디버그 모드 빌드 (by RUZEN)",
             "command": "/usr/bin/clang++",
             "args": [
@@ -30,20 +28,22 @@
             "detail": "디버거에서 생성된 작업입니다."
         },
         {
-            "type": "cppbuild",
+            "type": "shell",
             "label": "[windows-cl.exe] c++ 디버그 모드 빌드 (by RUZEN)",
             "command": "cl.exe",
             "args": [
                 "/Zi",
                 "/EHsc",
                 "/Fe:",
-                "..\\bin\\&{fileBasenameNoExtension}.exe",
+                "..\\bin\\${fileBasenameNoExtension}.exe",
                 "${file}"
             ],
             "options": {
-                "cwd": "&{fileDirname}"
+                "cwd": "${fileDirname}"
             },
-            "problemMatcher": "&msCompile",
+            "problemMatcher": [
+                "$msCompile"
+            ],
             "group": {
                 "kind": "build",
                 "idDefault": true
@@ -57,11 +57,11 @@
             "args": [
                 "-g",
                 "${file}",
-                "${-o}",
-                "../bin/${fileBasenameNoExtension}"
+                "-o",
+                "../bin/${fileBasenameNoExtension}.out"
             ],
             "options": {
-                "cwd": "/usr/bin"
+                "cwd": "${fileDirname}"
             },
             "problemMatcher": [
                 "$gcc"
