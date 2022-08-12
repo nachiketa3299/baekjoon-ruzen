@@ -8,5 +8,5 @@ int main(void) {
     return 0;
 }
 
-// STUDY: 입력 cin에 대해서 좀 더 자세하게 정리
-// STUDY: 입력받은 숫자를 cpp에서 연산하는 방법 (정수로)
+// TODO: 입력 cin에 대해서 좀 더 자세하게 정리
+// TODO: 입력받은 숫자를 cpp에서 연산하는 방법 (정수로)

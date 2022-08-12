@@ -18,4 +18,4 @@ int main (void) {
     return 0;
 }
 
-// STUDY: Escaping letters에 대한 조사
+// TODO: Escaping letters에 대한 조사

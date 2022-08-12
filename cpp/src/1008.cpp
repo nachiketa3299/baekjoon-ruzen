@@ -14,7 +14,7 @@ int main (void) {
     return 0;
 }
 
-// STUDY 자료형 변환에 대하여 정리할 것 
-// STUDY 자료형 별 정확도?
-// STUDY cout.precision은 뭘 하는 놈인가?
+// TODO 자료형 변환에 대하여 정리할 것 
+// TODO 자료형 별 정확도?
+// TODO cout.precision은 뭘 하는 놈인가?
 // HARD

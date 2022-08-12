@@ -66,4 +66,4 @@ int * intToArr(int input) {
     return int_arr;
 }
 
-// STUDY int decimals 
+// TODO int decimals 

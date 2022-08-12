@@ -2,7 +2,7 @@
 #include <cassert>
 
 using namespace std;
-// STUDY 구조체 선언에 대해서 
+// TODO 구조체 선언에 대해서 
 
 typedef struct Clock {
     int H;
