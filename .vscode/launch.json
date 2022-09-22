@@ -8,7 +8,7 @@
             "name": "[lldb] 디버그 (by RUZEN)",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceRoot}/cpp/bin/${fileBasenameNoExtension}.out",
+            "program": "${workspaceRoot}/bin/${fileBasenameNoExtension}.out",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

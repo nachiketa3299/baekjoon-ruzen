@@ -1,20 +1,22 @@
 {
-	"cmd" : [
-		"zsh",
+	"cmd": [
+		"bash",
 		"-c",
-		"clang '${file}' -Wall -o '${file_path}/${file_base_name}' && '${file_path}/${file_base_name}'"
+		"clang '${file}' -std=c++14 -Wall -o '${file_path}/${file_base_name}' && '${file_path}/${file_base_name}'"
 	],
 	"selector": "source.c",
 	"shell": false,
-	"working_dir": "${file_path}",
-	"variants": {
-		"name": "Run",
-		"cmd": [
-			"clang",
-			"${file}",
-			"-o",
-			"${file_base_name}",
-			"-Wall"
-		]
-	}
+	"working_dir": "$file_path",
+	"variants": [
+		{
+			"name": "Fucking Run",
+			"cmd": [
+				"clang",
+				"$file",
+				"-o",
+				"${file_base_name}",
+				"-Wall"
+			]
+		}
+	]
 }
