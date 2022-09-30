@@ -19,13 +19,8 @@ private:
         int bottom;
         int north;
         int south;
-    } faces;
+    } faces { 0, 0, 0, 0, 0, 0 };
 public:
-    Dice (void) {
-        this->faces = { 0, 0, 0, 0, 0, 0 };
-    }
-    Dice (const Dice& d) {
-    }
 
     void rotateEast (void) {
         int temp_bottom = this->faces.bottom;
@@ -129,7 +124,13 @@ public:
         return;
     }
 
+    ~Handler (void) {
+        delete m;
+        delete d;
+        return;
+    }
 
+private:
     void setDicePos (DicePos new_dicepos, int command) {
         this->dicepos = new_dicepos;
         switch (command) {
@@ -148,39 +149,10 @@ public:
         }
         return;
     }
-
-    void process (void) {
-        for (int i = 0; i < this->commands.size(); i++) {
-            //std::cout << "Current Command: " << this->commands[i] << std::endl;
-            // Boundary Check
-            DicePos new_dicepos = this->commandDicePos(this->commands[i]);
-            //std::cout << "New Pos: (" << new_dicepos.x << ", " << new_dicepos.y << ")" << std::endl;
-            if (this->boundaryCheck(new_dicepos)) {
-                this->setDicePos(new_dicepos, this->commands[i]);
-                const int& x = this->dicepos.x;
-                const int& y = this->dicepos.y;
-                if (this->m->getNumber(x, y) == 0) {
-                    int new_num = this->d->getBottom();
-                    this->m->setNumber(x, y, new_num);
-                } else {
-                    int new_num = this->m->getNumber(x, y);
-                    this->d->setBottom(new_num);
-                    this->m->setNumber(x, y, 0);
-                }
-                //this->d->print();
-                std::cout << this->d->getTop() << std::endl;
-            } else {
-                ;
-            }
-        }
-    }
-
     bool boundaryCheck (const DicePos& new_dicepos) const {
-        bool cond1;
-        cond1 = new_dicepos.x >= 0 && new_dicepos.x <= this->m->getN() - 1;
-        bool cond2;
-        cond2 = new_dicepos.y >= 0 && new_dicepos.y <= this->m->getM() - 1;
-        return cond1 && cond2;
+        bool c1 = new_dicepos.x >= 0 && new_dicepos.x <= this->m->getN() - 1;
+        bool c2 = new_dicepos.y >= 0 && new_dicepos.y <= this->m->getM() - 1;
+        return c1 && c2;
     }
 
     DicePos commandDicePos (int command) {
@@ -198,6 +170,30 @@ public:
                 return DicePos { 0, 0 };
         }
     }
+
+public:
+    void process (void) {
+        for (int i = 0; i < this->commands.size(); i++) {
+            DicePos new_dicepos = this->commandDicePos(this->commands[i]);
+            if (this->boundaryCheck(new_dicepos)) {
+                this->setDicePos(new_dicepos, this->commands[i]);
+                const int& x = this->dicepos.x;
+                const int& y = this->dicepos.y;
+                if (this->m->getNumber(x, y) == 0) {
+                    int new_num = this->d->getBottom();
+                    this->m->setNumber(x, y, new_num);
+                } else {
+                    int new_num = this->m->getNumber(x, y);
+                    this->d->setBottom(new_num);
+                    this->m->setNumber(x, y, 0);
+                }
+                std::cout << this->d->getTop() << std::endl;
+            } else {
+                ;
+            }
+        }
+    }
+
 };
 
 int main (void) {
