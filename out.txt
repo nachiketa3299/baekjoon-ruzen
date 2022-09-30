@@ -1,2 +1,0 @@
-Read a from cin: 3
-Write b to cout: 

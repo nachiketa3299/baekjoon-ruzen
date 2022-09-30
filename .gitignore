@@ -9,4 +9,4 @@ cpp/bin/
 
 _includes/**
 _layouts/**
-
+.DS_Store
