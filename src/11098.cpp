@@ -6,8 +6,9 @@
 struct Information {
 	int price;
 	std::string name;
+
 	static bool condByPrice(const Information& i1, const Information& i2) {
-		return i1.price < i2.price;
+		return i1.price > i2.price;
 	}
 };
 
@@ -25,10 +26,12 @@ int main(void) {
 			std::cin >> cases[i][j].price;
 			std::cin >> cases[i][j].name;
 		}
-
-		std::sort(cases[i].begin(), cases[i].end(), &Information::condByPrice);
-		std::cout << cases[i].front() << std::endl;
 	}
+
+        for (auto& c: cases) {
+            std::sort(c.begin(), c.end(), &Information::condByPrice);
+            std::cout << c.front().name << std::endl;
+        }
 
 	return 0;
 }

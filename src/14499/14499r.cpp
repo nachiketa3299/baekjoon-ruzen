@@ -12,7 +12,7 @@ namespace DIRECTION {
 
 class Dice {
 private:
-    struct {
+    struct Face {
         int east;
         int west;
         int top;
@@ -22,37 +22,37 @@ private:
     } faces { 0, 0, 0, 0, 0, 0 };
 public:
 
-    void rotateEast (void) {
+    void rotate (int command) {
         int temp_bottom = this->faces.bottom;
-        this->faces.bottom = this->faces.east;
-        this->faces.east = this->faces.top;
-        this->faces.top = this->faces.west;
-        this->faces.west = temp_bottom;
+        switch (command) {
+            case DIRECTION::EAST:
+                this->faces.bottom = this->faces.east;
+                this->faces.east = this->faces.top;
+                this->faces.top = this->faces.west;
+                this->faces.west = temp_bottom;
+                break;
+            case DIRECTION::WEST:
+                this->faces.bottom = this->faces.west;
+                this->faces.west = this->faces.top;
+                this->faces.top = this->faces.east;
+                this->faces.east = temp_bottom;
+                break;
+            case DIRECTION::NORTH:
+                this->faces.bottom = this->faces.north;
+                this->faces.north = this->faces.top;
+                this->faces.top = this->faces.south;
+                this->faces.south = temp_bottom;
+                break;
+            case DIRECTION::SOUTH:
+                this->faces.bottom = this->faces.south;
+                this->faces.south = this->faces.top;
+                this->faces.top = this->faces.north;
+                this->faces.north = temp_bottom;
+                break;
+        }
         return;
     }
-    void rotateWest (void) {
-        int temp_bottom = this->faces.bottom;
-        this->faces.bottom = this->faces.west;
-        this->faces.west = this->faces.top;
-        this->faces.top = this->faces.east;
-        this->faces.east = temp_bottom;
-        return;
-    }
-    void rotateNorth (void) {
-        int temp_bottom = this->faces.bottom;
-        this->faces.bottom = this->faces.north;
-        this->faces.north = this->faces.top;
-        this->faces.top = this->faces.south;
-        this->faces.south = temp_bottom;
-    }
-    void rotateSouth (void) {
-        int temp_bottom = this->faces.bottom;
-        this->faces.bottom = this->faces.south;
-        this->faces.south = this->faces.top;
-        this->faces.top = this->faces.north;
-        this->faces.north = temp_bottom;
-        return;
-    }
+
     int getBottom (void) const {
         return this->faces.bottom;
     }
@@ -64,11 +64,6 @@ public:
     int getTop (void) const {
         return this->faces.top;
     }
-    void print (void) const {
-        std::cout << faces.east << faces.west<<faces.top << faces.bottom << faces.north<<faces.south << std::endl;
-        return;
-    }
-    
 };
 
 class Map {
@@ -113,14 +108,14 @@ private:
     struct DicePos {
         int x;
         int y;
+        DicePos (int x, int y) : x(x), y(y) {}
     } dicepos;
 public:
-    Handler (const Map& m, int x, int y, const std::vector<int>& commands) {
-        this->m = new Map (m);
+    Handler (const Map& m, int x, int y, const std::vector<int>& commands) 
+    : dicepos(x, y) {
+        this->m = new Map(m);
         this->d = new Dice;
         this->commands = commands;
-        this->dicepos.x = x;
-        this->dicepos.y = y;
         return;
     }
 
@@ -131,22 +126,9 @@ public:
     }
 
 private:
-    void setDicePos (DicePos new_dicepos, int command) {
+    void setDicePos (const DicePos& new_dicepos, int command) {
         this->dicepos = new_dicepos;
-        switch (command) {
-            case DIRECTION::EAST:
-                this->d->rotateEast();
-                break;
-            case DIRECTION::WEST:
-                this->d->rotateWest();
-                break;
-            case DIRECTION::NORTH:
-                this->d->rotateNorth();
-                break;
-            case DIRECTION::SOUTH:
-                this->d->rotateSouth();
-                break;
-        }
+        this->d->rotate(command);
         return;
     }
     bool boundaryCheck (const DicePos& new_dicepos) const {
@@ -166,7 +148,7 @@ private:
             case DIRECTION::SOUTH:
                 return DicePos { this->dicepos.x + 1, this->dicepos.y };
             default:
-                std::cout << "Error" << std::endl;
+                std::cerr << "Error" << std::endl;
                 return DicePos { 0, 0 };
         }
     }
@@ -180,11 +162,9 @@ public:
                 const int& x = this->dicepos.x;
                 const int& y = this->dicepos.y;
                 if (this->m->getNumber(x, y) == 0) {
-                    int new_num = this->d->getBottom();
-                    this->m->setNumber(x, y, new_num);
+                    this->m->setNumber(x, y, this->d->getBottom());
                 } else {
-                    int new_num = this->m->getNumber(x, y);
-                    this->d->setBottom(new_num);
+                    this->d->setBottom(this->m->getNumber(x, y));
                     this->m->setNumber(x, y, 0);
                 }
                 std::cout << this->d->getTop() << std::endl;
