@@ -1,11 +1,9 @@
 *.out
-.vscode/
-!.vscode/*.json
+.vscode/*
 
-cpp/bin/
-**/*.dSYM/
-**/*.exe
-**/*.obj
+*.dSYM/
+*.exe
+*.obj
 
 _includes/**
 _layouts/**
