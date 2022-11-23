@@ -4,6 +4,8 @@
 *.dSYM/
 *.exe
 *.obj
+*.ilk
+*.pdb
 
 _includes/**
 _layouts/**
