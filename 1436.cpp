@@ -4,10 +4,10 @@
 namespace STR {
     const std::string APO = "666";
 }
+
 namespace INT {
     const int APO = 666;
 }
-
 
 int main(void) {
     int N; std::cin >> N;
