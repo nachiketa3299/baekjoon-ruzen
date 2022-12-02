@@ -57,11 +57,37 @@
             "problemMatcher": [
                 "$gcc"
             ],
+            "group": "build",
+            "detail": "디버거에서 생성된 작업입니다."
+        },
+        {
+            "type": "cppbuild",
+            "label": "🤔 RZN: C/C++: g++-12 활성 파일 빌드",
+            "command": "/usr/local/bin/g++-12",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-Wall",
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}/a.out"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
-            "detail": "디버거에서 생성된 작업입니다."
+            "detail": "컴파일러: /usr/local/bin/g++-12"
+        },
+        {
+            "label": "execute",
+            "command": "${fileDirname}/a.out",
+            "group": "test"
         }
     ],
     "version": "2.0.0"
