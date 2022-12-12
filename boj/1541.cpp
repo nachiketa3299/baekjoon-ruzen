@@ -51,8 +51,8 @@ std::vector<int> parsePlus(const std::vector<std::string> &r) {
 }
 
 int vecSum(const std::vector<int> &vec) {
-    int sum = 0;
-    for (const auto &e: vec) sum += e;
+    int sum = vec.front();
+    for(auto it = vec.begin() + 1; it != vec.end(); ++it) sum -= *it;
     return sum;
 }
 
